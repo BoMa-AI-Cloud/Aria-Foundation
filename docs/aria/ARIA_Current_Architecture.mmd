@@ -1,0 +1,37 @@
+flowchart TB
+  U["People and authorized client surfaces<br/>Web • mobile • messaging • optional voice"]
+  I["Application and conversation entry<br/>Identity • role • domain context"]
+  C["Context assembly<br/>Fresh source reads • conversation • retrieval"]
+  D["Decision and execution routing<br/>Intent shortcuts • capability registry • selected tools"]
+  M["Model lanes<br/>Local inference • configured cloud assistance"]
+  A["Action controls<br/>Principal • reversibility • source taint<br/>Grants and mode-dependent enforcement"]
+  X["Domain tools and adapters<br/>Home • energy • communications<br/>Documents • business • scoped computer work"]
+  S["Durable records<br/>Facts • lessons • events • documents<br/>Relationships • projects • action receipts"]
+  P["Background work<br/>Scheduled learning • foresight<br/>Project steps • maintenance"]
+  Q["Evidence and reliability<br/>Freshness • health • answer checks<br/>Calibration • tests • release records"]
+
+  U --> I --> C --> D
+  S -->|"Bounded retrieval"| C
+  X -->|"Source observations"| C
+  D -->|"Deterministic path"| A
+  D -->|"Reasoning / tool planning"| M
+  M -->|"Selected tool requests"| A
+  A -->|"Permitted dispatch"| X
+  X -->|"Results / receipts"| S
+  M -->|"Conversation / learned records"| S
+  S --> P
+  P -->|"Bounded work"| D
+  Q -.-> C
+  Q -.-> A
+  Q -.-> X
+  Q -.-> P
+  C -->|"Grounded response context"| U
+
+  classDef surface fill:#eaf2ff,stroke:#3464aa,color:#122848;
+  classDef cognitive fill:#edf7f0,stroke:#3b8055,color:#183b25;
+  classDef control fill:#fff4e6,stroke:#b07927,color:#4b3412;
+  classDef durable fill:#f2edff,stroke:#7760a1,color:#33264b;
+  class U,I surface;
+  class C,D,M,P cognitive;
+  class A,Q control;
+  class S,X durable;

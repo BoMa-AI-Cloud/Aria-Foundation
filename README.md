@@ -1,13 +1,15 @@
 # Aria Foundation
 
-ARIA's proposed foundations and unified v1.1 architecture.
+ARIA's implemented architecture, proposed foundations, and unified v1.1 design.
 
 ## Documents
+
+- [Current Architecture — implemented system and evidence boundaries](docs/aria/ARIA_Current_Architecture.md)
 
 - [ARIA Foundations](docs/aria/ARIA_Foundations.md)
 - [Unified Proposed Architecture (Mermaid source)](docs/aria/ARIA_v1.1_Unified_Proposed_Architecture.mmd)
 
-These documents are proposals, not proof of implementation, acceptance, deployment, or permission. Their original status labels are preserved.
+The current architecture overview describes implemented source at a dated revision and identifies its verification limits. The foundations and unified v1.1 diagram remain proposals, not proof of implementation, acceptance, deployment, or permission. Their original status labels are preserved.
 
 ## Source provenance
 
