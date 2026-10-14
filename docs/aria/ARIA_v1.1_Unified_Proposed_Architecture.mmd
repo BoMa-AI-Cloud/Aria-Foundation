@@ -1,0 +1,82 @@
+flowchart TB
+STATUS["ARIA v1.1 — UNIFIED PROPOSED ARCHITECTURE
+Shared principles across operating and builder systems
+Not proof of implementation, acceptance, deployment, or permission
+Foundations drawn from CLAUDE.md Laws 1–21 + VISION.md + LESSONS.md"]
+HUMAN["TIER 0 — BRAD / AUTHORIZED HUMAN OWNER<br/>Law 1: socio-economic status is priority #1<br/>Outcomes, standards, grants, reserved decisions<br/>Amend, approve, suspend, revoke, stop"]
+POLICY["TIER 1 — CONSTITUTION AND VERSIONED POLICY<br/>Law 21: every change advances a named section of VISION.md<br/>Safety → welfare / privacy / consent / human rights<br/>→ integrity → security → resources → efficiency → optimization"]
+STATUS -.-> HUMAN
+HUMAN -->|Approves applicable policy and grants| POLICY
+
+subgraph COMMON["COMMON GROUND — APPLIES TO EVERY TIER AND BOTH ORGANIZATIONS"]
+    direction TB
+    PRINCIPLES["SAME CONCEPTS, SCOPED TO EACH RESPONSIBILITY<br/>Authority: explicit purpose, permitted data, actions, audience, expiry<br/>Evidence (Laws 2, 3, 19): exact identity, provenance, time, coverage, uncertainty, corrections<br/>Measure do not recall; absence reported as absence; indexed ≠ aware<br/>Responsibility: owner, intended outcome, dependencies, next action, release conditions<br/>Resources: reservations, aggregate exposure, budgets, exclusive ownership<br/>Execution (Laws 8, 9, 17): durable intent, stable IDs, bounded retry, unknown-effect reconciliation<br/>Landed ≠ live; listener judges outcome, not attempt<br/>Assurance (Laws 10, 20): independent claim-specific verification, soundness AND progress<br/>Red-proofed gates; every repair states falsifiable prediction; fix the CLASS<br/>Continuity: checkpoints, restart reconciliation, handoff, retention and deletion<br/>Learning: proportionate proposals, validation, authorized change, rollback / retirement"]
+    CONTRACT["RECURSIVE CONTRACT — EVERY CHILD INHERITS THE BOUNDARY<br/>Same or narrower data, authority, audience, expiry, and budget<br/>Explicit tools, allowed effects, stop rules, evidence, receipts, and handoff<br/>Parent responsibility remains accountable<br/>Cannot check a required invariant? Do not dispatch"]
+    PRINCIPLES --> CONTRACT
+end
+
+ENFORCE["INDEPENDENT POLICY / EXECUTION CONTROL PLANE<br/>Identity, credentials, scoped permissions, revocation<br/>Network / filesystem / provider / device boundaries<br/>Budgets, reservations, expiry, audit IDs, stop controls<br/>Recheck current authority at dispatch, retry, resumption, and effects<br/>Laws 4–7, 11–16, 18 enforced here (readiness, health numbers, enumeration, smokes, unkeyed rows, critical escalation, backups, monitors that cry wolf, warnings fail suite)"]
+POLICY --> ENFORCE
+POLICY -.->|Defines applicable constraints| COMMON
+COMMON -.-> ENFORCE
+
+subgraph OPERATING["OPERATING ORGANIZATION — CARRY HUMAN RESPONSIBILITIES"]
+    direction TB
+    OC["TIER 2 — ARIA RESPONSIBILITY COORDINATOR<br/>Shared understanding, source health, evidence, uncertainty<br/>Plans and continuing follow-through"]
+    OR["TIER 3 — OWNED RESPONSIBILITIES AND CAPABILITY LANES<br/>Home / energy / permitted sensing; communications<br/>Business / finance; projects / research; public presence; platform"]
+    OW["TIER 4 — BOUNDED WORK PACKAGES / WORKERS<br/>Scoped parent grant; current dependencies; assigned outcome"]
+    OD["TIER 5 — ACTION INTENT / OUTBOX / DISPATCH<br/>Stable action and attempt IDs; idempotency where supported<br/>No blind duplicate after an uncertain effect"]
+    OA["SCOPED PROVIDER OR PHYSICAL ADAPTER<br/>Actual live-enabled state requires current evidence"]
+    OV["INDEPENDENT OUTCOME AND SIDE-EFFECT CHECK<br/>Acknowledgement is not observed completion<br/>Law 20: falsifiable prediction checked by listener"]
+    ACCOUNT["RESPONSIBILITY ACCOUNT<br/>Established result, failed / unresolved / not run / refused checks<br/>Owned next action, reconsideration, completion, or reserved decision"]
+    OC --> OR --> OW --> OD --> OA --> OV --> ACCOUNT
+end
+
+subgraph BUILDERS["TEMPORARY BUILDER ORGANIZATION — BUILD AND REPAIR ARIA"]
+    direction TB
+    BC["TIER 2 — BUILD COORDINATOR<br/>Ready queue, dependency/resource graph, consolidated owner account"]
+    BG["TIER 3 — CONTRACT STEWARD AND DOMAIN GOVERNORS<br/>Foundation; responsibility; protection; operations; capability integration<br/>Version shared meaning and preserve existing candidates"]
+    BP["TIER 4 — READY BOUNDED PACKAGES<br/>G01–G28 current recheck / acceptance work<br/>Exact baseline, dependencies, file/resource lease, budget, reviewer<br/>Parallel only when independently ready and non-conflicting"]
+    BI["TIER 5 — ISOLATED IMPLEMENTATION AND AUTHOR CHECKS<br/>One writer per file across branches and worktrees<br/>Containment proven before executable tests; no self-certification"]
+    BR["INDEPENDENT EXACT-ARTIFACT REVIEW<br/>PASS for specified scope / FAIL / BLOCKED / UNKNOWN<br/>Author receipt or source presence is not independent effect proof<br/>Law 10: red-proof the gate"]
+    BQ["SINGLE INTEGRATION / RELEASE QUEUE<br/>Designated integrator; compatible dependencies and migrations<br/>Combined acceptance and complete responsibility rehearsal"]
+    BL["SPECIFICALLY APPROVED ROLLOUT / RECOVERY<br/>Designated operator; current release limits<br/>Verify loaded identity THEN original intended outcome<br/>Laws 8 & 9: landed by bytes, boot == HEAD"]
+    BC --> BG --> BP --> BI --> BR --> BQ --> BL
+end
+
+ENFORCE --> OC
+ENFORCE --> BC
+COMMON -.-> OPERATING
+COMMON -.-> BUILDERS
+
+subgraph CROSSCUT["CROSS-CUTTING SYSTEMS — SCOPED ACCESS, NOT UNIVERSAL VISIBILITY"]
+    direction TB
+    RECORD["DURABLE RECORDS AND VERSIONED CONTRACTS<br/>Identity; source results; evidence / claims; responsibilities<br/>Reservations; attempts; verification; disclosure / account outputs<br/>Exact source / config / candidate / loaded-build bindings<br/>Operating ledger AND builder registry use these semantics<br/>Reuse existing stores; shared semantics do not require one database"]
+    ASSURE["INDEPENDENT ASSURANCE MESH<br/>Compliance / privacy / disclosure; evidence and decision quality<br/>Outcomes and side effects; sampled adversarial inspection<br/>System health; investigations; oversight-quality review<br/>Scoped budgets and access; no agent approves its own authority"]
+    LEARN["CONTROLLED LEARNING / RELEASE + CLASS-CLOSURE LOOP<br/>Law 20 explicit:<br/>1. Measure (Law 2) with the command that produced the number<br/>2. Error found → investigate and classify (LESSONS.md family of shapes)<br/>3. Fix the ROOT-CAUSE CLASS with a mechanical gate, not only the instance<br/>4. Verify the entire class is closed (red-proof, prediction held, class does not reappear)<br/>5. Closed class becomes a new ongoing measurement<br/>6. Cycle continues<br/>Observe → assess → propose → independently validate<br/>→ obtain applicable approval → rollout → monitor → revise / retire<br/>Validated repairs return as bounded builder proposals<br/>Approved releases update ARIA; no implicit authority expansion<br/>Policy or mandate changes return to the authorized human<br/>Reliability never automatically expands autonomy"]
+end
+
+COMMON -.-> RECORD
+COMMON -.-> ASSURE
+COMMON -.-> LEARN
+ASSURE -.->|Independent operating checks| OV
+ASSURE -.->|Independent builder checks| BR
+ACCOUNT -->|Outcome evidence and unresolved causes| LEARN
+BL -->|Exact-artifact and original-outcome evidence| LEARN
+LEARN -->|New measurement after class closed| ASSURE
+
+STOP["UNIVERSAL FAIL-CLOSED / ESCALATION RULE<br/>Missing authority, unchecked invariant, failed isolation, drift,<br/>conflicting lease, exceeded budget, unsafe or uncertain effect:<br/>stop or contain the affected work; preserve evidence; reconcile<br/>Continue unrelated authorized work; return genuinely reserved decisions<br/>Reserved matters return to human with evidence, options, recommendation<br/>Silence is never approval; owner is not the routine message bus"]
+HUMAN -->|Independent stop / revocation| ENFORCE
+CONTRACT -.-> STOP
+ASSURE -.-> STOP
+
+classDef human fill:#E5F2FC,stroke:#2783DE,color:#17324d
+classDef foundation fill:#F0EFED,stroke:#777,color:#2C2C2B
+classDef runtime fill:#E8F1EC,stroke:#39805a,color:#193a29
+classDef builder fill:#EEF0FF,stroke:#7279b2,color:#292f55
+classDef caution fill:#FBEBDE,stroke:#D5803B,color:#613611
+class HUMAN,POLICY human
+class PRINCIPLES,CONTRACT,ENFORCE,RECORD,ASSURE,LEARN foundation
+class OC,OR,OW,OD,OA,OV,ACCOUNT runtime
+class BC,BG,BP,BI,BR,BQ,BL builder
+class STATUS,STOP caution
